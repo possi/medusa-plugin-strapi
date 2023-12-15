@@ -69,7 +69,7 @@ export default async (req, res) => {
       "tags",
       "type",
       "collection",
-      "profile",
+      // "profile",
     ]
     const regionRelations = [
       "countries",
@@ -152,6 +152,7 @@ export default async (req, res) => {
 
     res.status(200).send(response)
   } catch (error) {
+    console.error(error);
     res.status(400).send(`Webhook error: ${error.message}`)
   }
 }
@@ -162,6 +163,6 @@ export default async (req, res) => {
  * @return {*}
  */
 function getCount(manager, repository) {
-  const customRepository = manager.getCustomRepository(repository)
+  const customRepository = manager.withRepository(repository)
   return customRepository.count()
 }
